@@ -28,15 +28,25 @@ elif "Moderate" in activity: mult = 1.55
 elif "Active" in activity: mult = 1.725
 else: mult = 1.9
 
+# Replace the if st.button block with:
 if st.button("🚀 Calculate TDEE", use_container_width=True, type="primary"):
-    if sex == "Female": bmr = 10*weight + 6.25*height - 5*age - 161
-    else: bmr = 10*weight + 6.25*height - 5*age + 5
-    tdee = bmr * mult
+    if sex == "Female": 
+        bmr = 10*weight + 6.25*height - 5*age - 161
+    else: 
+        bmr = 10*weight + 6.25*height - 5*age + 5
+    tdee = bmr * mult  # Uses fresh mult!
     
     st.session_state.tdee = tdee
-    st.success(f"✅ **TDEE: {tdee:.0f} cal/day**")
-    st.rerun()
-
+    st.session_state.bmr = bmr
+    st.session_state.mult = mult
+    
+    st.success(f"✅ **TDEE: {tdee:.0f}** (BMR {bmr:.0f} × {mult})")
+    
+    # Show result BEFORE rerun
+    st.metric("Current TDEE", f"{tdee:.0f} cal")
+    
+    if st.button("🔄 Update & Continue"):  # Separate confirm
+        st.rerun()
 # Safe default
 if 'tdee' not in st.session_state:
     st.session_state.tdee = 2600
