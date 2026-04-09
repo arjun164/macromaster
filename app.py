@@ -21,10 +21,11 @@ with col2:
     activity = st.selectbox("Activity", ["Sedentary (1.2)", "Moderate (1.55)", "Active (1.725)", "Very Active (1.9)"], 0)
 
 if st.button("🚀 Calculate TDEE", use_container_width=True, type="primary"):
-    if "Sedentary" in activity: mult = 1.2
-    elif "Moderate" in activity: mult = 1.55
+    # FIXED ORDER - Very Active FIRST!
+    if "Very Active" in activity: mult = 1.9
     elif "Active" in activity: mult = 1.725
-    else: mult = 1.9
+    elif "Moderate" in activity: mult = 1.55
+    elif "Sedentary" in activity: mult = 1.2
     
     if sex == "Female": 
         bmr = 10*weight + 6.25*height - 5*age - 161
@@ -36,8 +37,10 @@ if st.button("🚀 Calculate TDEE", use_container_width=True, type="primary"):
     st.session_state.bmr = bmr
     st.session_state.mult = mult
     st.session_state.weight = weight
+    st.session_state.activity = activity
     
     st.success(f"✅ **TDEE: {tdee:.0f}** (BMR {bmr:.0f} × {mult})")
+    st.info(f"Activity: {activity}")
     st.metric("Current TDEE", f"{tdee:.0f} cal")
     
     if st.button("🔄 Update & Continue", use_container_width=True):
