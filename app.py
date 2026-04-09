@@ -20,7 +20,7 @@ with col1:
     height = st.number_input("Height (cm)", 140.0, 220.0, 175.0)
 with col2:
     age = st.number_input("Age", 12, 80, 19)
-    activity = st.selectbox("Activity", ["Sedentary (1.2)", "Moderate (1.55)", "Active (1.725)", "Very Active (1.9)"], 1)
+   activity = st.selectbox("Activity", ["Sedentary (1.2)", "Moderate (1.55)", "Active (1.725)", "Very Active (1.9)"], key="activity_key")
 
 if st.button("🚀 Calculate TDEE", use_container_width=True, type="primary"):
     # FRESH multiplier EVERY click
