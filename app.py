@@ -1,15 +1,14 @@
 import streamlit as st
 st.set_page_config(layout="wide")
-st.title("🏆 **MacroMaster v2.0** - Live!")
-st.balloons()
+st.title("🏆 MacroMaster v3 - LIVE!")
+st.success("✅ Multi-page working perfectly!")
 
-st.header("✅ **Status: Working Perfectly**")
-st.success("Your foundation is rock-solid. Ready for premium upgrades!")
+st.header("🎯 Quick Goal Calculator")
+sex = st.selectbox("Sex", ["Male", "Female", "Other"])
+weight = st.number_input("Weight kg", 50, 200, 108)
+height = st.slider("Height cm", 150, 210, 188)
+age = st.slider("Age", 0, 101, 25)
+goal = st.selectbox("Goal", ["Cut", "Bulk", "Maintain"])
 
-# Game-changer features preview
-st.header("🎮 **Game-Changer Features Coming**")
-col1, col2 = st.columns(2)
-col1.metric("🤖 AI Photo Logging", "1-tap meals")
-col2.metric("📊 Smart Charts", "Weekly trends")
-col1.metric("🔥 Custom Goals", "Any body goal")
-col2.metric("🌍 Multi-language", "World-ready")
+if st.button("Calc Macros"):
+    bmr = 10*weight + 6.25*height - 5*age + 5 if sex == "Male" else 10*weight + 6.25*height
