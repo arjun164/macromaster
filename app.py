@@ -26,7 +26,7 @@ with col2:
 if "Sedentary" in activity: mult = 1.2
 elif "Moderate" in activity: mult = 1.55
 elif "Active" in activity: mult = 1.725
-else: mult = 1.9
+elif "Very Active" in activity: mult = 1.9
 
 # Replace the if st.button block with:
 if st.button("🚀 Calculate TDEE", use_container_width=True, type="primary"):
